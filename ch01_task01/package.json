@@ -1,0 +1,14 @@
+{
+  "name": "lost-and-found-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lost and found reporting API challenge",
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": { "express": "^5.1.0" }
+}
