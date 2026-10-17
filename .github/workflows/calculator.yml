@@ -1,0 +1,37 @@
+name: Calculator
+
+on:
+  push:
+    paths:
+      - 'ch01_task02/**'
+      - '.github/workflows/calculator.yml'
+  pull_request:
+    paths:
+      - 'ch01_task02/**'
+      - '.github/workflows/calculator.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: calculator-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ch01_task02
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: ch01_task02/package-lock.json
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser

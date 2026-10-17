@@ -1,0 +1,23 @@
+{
+  "name": "forma-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A polished, accessible calculator built with vanilla HTML, CSS, and JavaScript.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.js",
+    "start": "node scripts/serve.js",
+    "test": "node --test test/*.test.js",
+    "test:browser": "playwright test",
+    "screenshots": "node scripts/capture.js",
+    "format": "prettier --write . --ignore-path .gitignore",
+    "format:check": "prettier --check . --ignore-path .gitignore"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "prettier": "^3.9.10"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
