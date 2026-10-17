@@ -103,10 +103,10 @@ const server = createServer(async (request, response) => {
 });
 
 server.on('error', (error) => {
-  console.error(`Unable to start Forma: ${error.message}`);
+  console.error(`Unable to start calculator: ${error.message}`);
   process.exitCode = 1;
 });
 
 server.listen(port, host, () => {
-  console.log(`Forma is available at http://${host}:${port}`);
+  console.log(`Calculator is available at http://${host}:${port}`);
 });

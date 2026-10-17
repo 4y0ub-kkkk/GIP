@@ -96,7 +96,7 @@ function updatePreview({ submitted = false } = {}) {
     currentResult = '0';
     validResult = true;
     setResult('0');
-    message.textContent = 'A fresh start. What’s on your mind?';
+    message.textContent = 'Enter an expression.';
     $('#copy-result').disabled = false;
     return true;
   }
@@ -105,8 +105,8 @@ function updatePreview({ submitted = false } = {}) {
     validResult = true;
     setResult(currentResult);
     message.textContent = submitted
-      ? 'All figured out. On to the next good idea.'
-      : 'A little clarity, as you type.';
+      ? 'Result saved to history.'
+      : 'Press Enter to calculate.';
     if (submitted) live.innerHTML = '<span class="status-dot"></span> SOLVED';
     $('#copy-result').disabled = false;
     return true;
@@ -151,7 +151,7 @@ function insertText(text) {
   const start = input.selectionStart ?? input.value.length;
   const end = input.selectionEnd ?? start;
   if (input.value.length - (end - start) + text.length > MAX_EXPRESSION) {
-    showToast('Let’s keep it to 240 characters.');
+    showToast('Maximum 240 characters.');
     return;
   }
   input.setRangeText(text, start, end, 'end');
@@ -194,7 +194,7 @@ function toggleSign() {
     });
   const next = unwrapped ? expression.slice(2, -1) : `−(${expression})`;
   if (next.length > MAX_EXPRESSION) {
-    showToast('Let’s keep it to 240 characters.');
+    showToast('Maximum 240 characters.');
     return;
   }
   input.value = next;
@@ -228,9 +228,9 @@ function calculate() {
 async function copyText(text) {
   try {
     await navigator.clipboard.writeText(text);
-    showToast('Result copied. One less thing to remember.');
+    showToast('Result copied.');
   } catch {
-    showToast('Copy isn’t available here. Select the result to copy it.');
+    showToast('Copy unavailable. Select the result to copy it.');
   }
 }
 
@@ -294,7 +294,7 @@ function applyTheme(theme) {
   $('#theme-toggle').setAttribute('aria-label', label);
   $('#theme-toggle').title = label;
   $('#theme-toggle use').setAttribute('href', dark ? '#i-sun' : '#i-moon');
-  $('meta[name="theme-color"]').content = dark ? '#1b2420' : '#f6f7f2';
+  $('meta[name="theme-color"]').content = dark ? '#202124' : '#ffffff';
 }
 
 function openShortcuts() {
@@ -404,16 +404,9 @@ $('#clear-history').addEventListener('click', () => {
   renderHistory();
   showToast(
     saved
-      ? 'A clean sheet. History cleared.'
+      ? 'History cleared.'
       : 'History cleared for this visit. Device storage is unavailable.',
   );
-});
-$('#try-example').addEventListener('click', () => {
-  input.value = '2 + 3 × 4';
-  completed = false;
-  updatePreview();
-  focusExpression();
-  announce('Example: 2 plus 3 times 4 equals 14.');
 });
 $('#theme-toggle').addEventListener('click', () => {
   const next =
@@ -422,7 +415,6 @@ $('#theme-toggle').addEventListener('click', () => {
   writeStorage(storageKeys.theme, next);
 });
 $('#open-shortcuts').addEventListener('click', openShortcuts);
-$('#footer-shortcuts').addEventListener('click', openShortcuts);
 $('#close-shortcuts').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', (event) => {
   const rect = dialog.getBoundingClientRect();

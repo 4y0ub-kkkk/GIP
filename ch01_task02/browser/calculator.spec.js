@@ -377,7 +377,7 @@ test('the keyboard guide opens with ? and Escape closes it without clearing the 
   await input.fill('2+3');
   await input.press('?');
   const dialog = page.getByRole('dialog', {
-    name: 'A quicker way to clarity.',
+    name: 'Keyboard shortcuts',
   });
   await expect(dialog).toBeVisible();
   await page.keyboard.press('Escape');
@@ -423,15 +423,20 @@ test('copy actions copy the result and history value through the clipboard API',
   expect(await page.evaluate(() => window.copiedResults)).toEqual(['72', '72']);
 });
 
-test('the example previews arithmetic without adding an unsubmitted history record', async ({
+test('the GDG Algiers identity loads with the calculator ready to use', async ({
   page,
 }) => {
-  await page
-    .getByRole('button', { name: 'Try example 2 plus 3 times 4', exact: true })
-    .click();
-  await expect(page.locator('#expression')).toHaveValue('2 + 3 × 4');
-  await expect(page.locator('#result')).toHaveText('14');
-  await expect(page.locator('#expression')).toBeFocused();
+  await expect(page).toHaveTitle('Calculator | GDG Algiers');
+  const logo = page.getByRole('img', { name: 'GDG Algiers', exact: true });
+  await expect(logo).toBeVisible();
+  await expect(logo).toHaveAttribute('src', './gdg.jpeg');
+  await expect
+    .poll(() =>
+      logo.evaluate((image) => image.complete && image.naturalWidth > 0),
+    )
+    .toBe(true);
+  await expect(page.locator('#expression')).toHaveValue('');
+  await expect(page.locator('#result')).toHaveText('0');
   await expect(page.locator('.history-item')).toHaveCount(0);
 });
 

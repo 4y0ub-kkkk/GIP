@@ -1,8 +1,8 @@
 {
-  "name": "forma-calculator",
+  "name": "gdg-algiers-calculator",
   "version": "1.0.0",
   "private": true,
-  "description": "A polished, accessible calculator built with vanilla HTML, CSS, and JavaScript.",
+  "description": "GDG Algiers calculator built with HTML, CSS, and vanilla JavaScript.",
   "type": "module",
   "scripts": {
     "dev": "node scripts/serve.js",

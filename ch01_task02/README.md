@@ -1,15 +1,17 @@
-# Forma — Calculator
+# GDG Algiers Calculator
 
 A focused calculator built with **HTML, CSS, and vanilla JavaScript**. No framework, runtime library, bundler, or backend is needed. Node.js provides the local development server and test tooling only.
 
-![Forma calculator, with its sage display, keypad, and calculation history](docs/preview.png)
+A compact interface uses the supplied GDG Algiers logo, neutral surfaces, and GDG's blue, red, yellow, and green for arithmetic operators. The calculator and calculation history sit together on desktop and stack on mobile.
+
+![GDG Algiers calculator with its keypad and calculation history](docs/preview.png)
 
 <details>
 <summary>Dark theme and mobile previews</summary>
 
-![Forma in dark mode](docs/preview-dark.png)
+![GDG Algiers calculator in dark mode](docs/preview-dark.png)
 
-<img src="docs/preview-mobile.png" width="375" alt="Forma calculator on a mobile screen">
+<img src="docs/preview-mobile.png" width="375" alt="GDG Algiers calculator on a mobile screen">
 
 </details>
 
@@ -30,7 +32,7 @@ Open [http://127.0.0.1:5173](http://127.0.0.1:5173). Set `PORT` to use a differe
 - Mouse, touch, and keyboard input, including parentheses and backspace.
 - Live result preview and a dedicated copy-result action.
 - Addition, subtraction, multiplication, division, powers, and percentages with operator precedence.
-- A calculation tape that stores the last 30 results in the current browser.
+- Calculation history that stores the last 30 results in the current browser.
 - An in-app keyboard shortcut reference.
 
 ## Calculation rules
@@ -70,7 +72,7 @@ npm run test:browser
 npm run format:check
 ```
 
-The 81 unit tests cover the expression engine. Twenty Playwright tests exercise the calculator in Chromium, including keyboard interaction, touch at a 375px viewport, persistence, storage failures, errors, and editing after equals.
+The 81 unit tests cover the expression engine. Twenty Playwright tests exercise the calculator in Chromium, including the GDG logo loading, keyboard interaction, touch at a 375px viewport, persistence, storage failures, errors, and editing after equals.
 
 Browser tests automatically use `/usr/bin/google-chrome` when available. To use a different Chrome executable, set `CHROME_PATH`. If neither is available, install Playwright's Chromium first:
 
@@ -87,6 +89,7 @@ Use `npm run format` to format the source. With the local server running, `npm r
 ```text
 index.html               Semantic page and calculator controls
 styles.css               Responsive interface and themes
+gdg.jpeg                 Supplied GDG Algiers logo
 assets/fonts/            Local fonts and license notices
 docs/                    Desktop, dark, and mobile screenshots
 js/                      Calculator logic and expression engine
