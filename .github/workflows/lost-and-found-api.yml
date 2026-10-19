@@ -23,4 +23,4 @@ jobs:
           cache: npm
           cache-dependency-path: ch01_task01/package-lock.json
       - run: npm ci
-      - run: npm test
+      - run: npm run test:coverage
